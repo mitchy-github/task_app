@@ -1,0 +1,43 @@
+<h3>スケジュール詳細</h3>
+
+<% if flash[:failure] %>
+  <p class="failure"><%= flash[:failure] %></p>
+<% end %>
+
+<table>
+  <tr>
+    <th>タイトル</th>
+    <td><%= @post.title %></td>
+  </tr>
+  <tr>
+    <th>開始日</th>
+    <td><%= @post.start_at.to_s(:datetime_jp) %></td>
+  </tr>
+
+  <tr>
+    <th>終了日</th>
+    <td><%= @post.end_at.to_s(:datetime_jp) %></td>
+  </tr>
+
+  <tr>
+    <th>終日</th>
+    <td>
+      <% if @post.is_all_day %>
+        <strong>○</strong>
+      <% end %>
+    </td>
+   </tr>
+
+  <tr>
+    <th>スケジュールメモ</th>
+    <td><%= @post.memo %></td>
+  </tr>
+</table>
+ 
+<div>
+  <ul>
+    <li><%= link_to "スケジュール一覧に戻る", :posts %></li>
+    <li><%= link_to "スケジュールを編集する", edit_post_path(@post.id) %></li>
+    <li><%= link_to "スケジュールを削除", post_path(@post.id), method: :delete, data: { confirm: "本当に削除しますか？" } %></li>
+  </ul>
+</div>
