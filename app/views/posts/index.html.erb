@@ -1,12 +1,7 @@
 <h3>スケジュール一覧</h3>
 
-<% if flash[:success] %>
-  <p class="success"><%= flash[:success] %></p>
-<% end %>
-
-<% if flash[:failure] %>
-  <p class="failure"><%= flash[:failure] %></p>
-<% end %>
+<%= render "shared/success" %>
+<%= render "shared/failure" %>
  
 <table>
   <thead>

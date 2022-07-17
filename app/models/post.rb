@@ -4,7 +4,6 @@ class Post < ApplicationRecord
   validates :memo, length: { maximum: 500 }
   validates :title, presence: true, length: { maximum: 50 }
   
-  #「ｓ」を取り忘れていた
   validate :not_before_today
   
   def not_before_today

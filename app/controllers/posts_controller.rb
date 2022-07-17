@@ -15,11 +15,10 @@ class PostsController < ApplicationController
   def new
     @page_title = "スケジュール新規作成"
     @post = Post.new
-    #「ｓ」が歩かないかで登録できなかった。。
   end
    
   def create
-    @post = Post.new(params.require(:post).permit(:title, :start_at, :end_at, :is_all_day, :memo))
+    @post = Post.new(post_params)
     if @post.save
       flash[:success] = "スケジュールを登録しました"
       redirect_to :posts
@@ -41,7 +40,7 @@ class PostsController < ApplicationController
  
   def update
     @post = Post.find(params[:id])
-    if @post.update(params.require(:post).permit(:title, :start_at, :end_at, :is_all_day, :memo))
+    if @post.update(post_params)
       flash[:success] = "「#{@post.id}」のスケジュールを更新しました"
       redirect_to :posts
     else
@@ -55,5 +54,11 @@ class PostsController < ApplicationController
     @post.destroy
     flash[:success] = "ユーザーを削除しました"
     redirect_to :posts
+  end
+  
+  private
+  
+  def post_params
+    params.require(:post).permit(:title, :start_at, :end_at, :is_all_day, :memo)
   end
 end
